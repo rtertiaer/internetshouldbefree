@@ -1,0 +1,10 @@
+auto {{ interface }}
+iface {{ interface }} inet static
+  address {{ address }}
+  netmask {{ netmask }}
+{% if gateway is defined %}
+  gateway {{ gateway }}
+{% endif %}
+{% if custom is defined %}
+  {{ custom }} 
+{% endif %}

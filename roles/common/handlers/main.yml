@@ -1,0 +1,7 @@
+---
+- name: restart networking
+  service: name=networking state=restarted enabled=yes
+- name: restart ufw
+  service: name=ufw state=restarted enabled=true
+- name: restart dhcpcd
+  service: name=dhcpcd state=restarted enabled=yes

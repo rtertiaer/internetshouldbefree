@@ -1,0 +1,5 @@
+---
+- name: template dhcp interface /etc/network/interfaces.d/{{ interface }}
+  template: src=roles/common/templates/networking/dhcp-interface.j2 dest=/etc/network/interfaces.d/{{ interface }} owner=root group=root mode=644 backup=yes
+  notify:
+    - restart networking

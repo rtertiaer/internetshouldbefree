@@ -1,0 +1,13 @@
+---
+# This installs and configures ufw, the uncomplicated firewall.
+- name: install ufw
+  package: name=ufw state=latest
+- name: enable ufw
+  ufw:
+    state: enabled
+    policy: allow
+- name: set logging for ufw
+  ufw:
+    logging: on
+- name: enable and start ufw
+  service: name=ufw state=started enabled=yes

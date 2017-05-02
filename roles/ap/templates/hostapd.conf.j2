@@ -1,0 +1,41 @@
+interface={{ ap_interface }}
+
+# Use the nl80211 driver with the brcmfmac driver; assumptions cuz raspberry pi
+driver=nl80211
+
+# This is the name of the network
+ssid={{ ssid }}
+
+# Use the 2.4GHz band
+hw_mode=g
+
+# Use channel {{ channel }} (0 is the same as acs_survey, an automatic channel pick mode)
+channel={{ channel }}
+
+# Enable 802.11n
+ieee80211n=1
+
+# Enable WMM
+wmm_enabled=1
+
+# Enable 40MHz channels with 20ns guard interval
+ht_capab=[HT40][SHORT-GI-20][DSSS_CCK-40]
+
+# Accept all MAC addresses
+macaddr_acl=0
+
+{% if hidden is defined %}
+# Require clients to know the network name
+ignore_broadcast_ssid=1
+{% endif %}
+
+{% if password is defined %}
+# Set up WPA
+wpa=2
+wpa_key_mgmt=WPA-PSK-SHA256
+wpa_passphrase={{ password }}
+wpa_ptk_rekey=60
+wpa_gmk_rekey=3600
+wpa_pairwise=CCMP
+rsn_pairwise=CCMP
+{% endif %}

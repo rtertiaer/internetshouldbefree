@@ -1,0 +1,9 @@
+---
+- name: install dnsmasq
+  package: name=dnsmasq state=latest
+- name: template dnsmasq.conf
+  template: src=roles/dnsdhcp/templates/dnsmasq.conf.j2 dest=/etc/dnsmasq.conf owner=root group=root mode=644 backup=yes
+  notify:
+    - restart dnsmasq
+- name: start and enable dnsmasq
+  service: name=dnsmasq state=started enabled=yes

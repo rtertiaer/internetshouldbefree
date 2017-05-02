@@ -1,0 +1,23 @@
+---
+- hosts: allinone
+  remote_user: deploy
+  become: yes
+  tasks:
+    - include: roles/common/tasks/base.yml
+    - include: roles/common/tasks/network-interfaces.yml
+    - include: roles/common/tasks/static-interface.yml interface='eth0' address='192.168.1.12' netmask='255.255.255.0' gateway='192.168.1.254' custom='metric 1'
+    - include: roles/common/tasks/static-interface.yml interface='wlan0' address='172.24.69.1' netmask='255.255.255.0' custom='metric 10'
+    - include: roles/common/tasks/ufw.yml
+    - include: roles/common/tasks/ufw_rule.yml rule=allow src="192.168.1.0/24"
+    - include: roles/common/tasks/ufw_rule.yml rule=allow insert=1 src="172.24.69.0/24" dest="172.24.69.0/24"
+    - include: roles/common/tasks/ufw_rule.yml rule=deny insert=2 src="172.24.69.0/24" dest="192.168.0.0/16"
+    - include: roles/common/tasks/ufw_rule.yml rule=deny insert=3 src="172.24.69.0/24" dest="10.0.0.0/8"
+    - include: roles/common/tasks/ufw_rule.yml rule=deny insert=4 src="172.24.69.0/24" dest="172.16.0.0/12"
+    - include: roles/common/tasks/ufw_rule.yml rule=allow insert=5 src="172.24.69.0/24"
+    - include: roles/ap/tasks/main.yml ap_interface=wlan0 ssid='Internet should be free' channel=1
+    - include: roles/dnsdhcp/tasks/main.yml lan_interface=wlan0 lan_address=172.24.69.1 dhcp_range_string=172.24.69.2,172.24.69.254,1h upstream_dns_server=192.168.1.254
+    - include: roles/gateway/tasks/main.yml nat_range="172.24.69.0/24" upstream_dev="eth0"
+  handlers:
+    - include: roles/common/handlers/main.yml
+    - include: roles/ap/handlers/main.yml
+    - include: roles/dnsdhcp/handlers/main.yml

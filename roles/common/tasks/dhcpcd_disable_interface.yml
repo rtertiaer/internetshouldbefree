@@ -1,0 +1,5 @@
+---
+- name: disable dhcp on interface
+  lineinfile: dest=/etc/dhcpcd.conf state=present regexp="^denyinterfaces {{ disable_interface }}$" insertbefore='^interface' line="denyinterfaces {{ disable_interface }}"
+  notify:
+    - restart dhcpcd

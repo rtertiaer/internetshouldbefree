@@ -1,0 +1,9 @@
+---
+- name: template static interface /etc/network/interfaces.d/{{ interface }}
+  template: src=roles/common/templates/networking/static-interface.j2 dest=/etc/network/interfaces.d/{{ interface }} owner=root group=root mode=644 backup=yes
+  notify:
+    - restart networking
+- name: disable dhcp on interface {{ interface }}
+  lineinfile: dest=/etc/dhcpcd.conf state=present regexp="^denyinterfaces {{ interface }}$" insertbefore='^interface' line="denyinterfaces {{ interface }}"
+  notify:
+    - restart dhcpcd

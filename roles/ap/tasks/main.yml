@@ -1,0 +1,13 @@
+---
+- name: install hostapd
+  package: name=hostapd state=latest
+- name: template /etc/hostapd/hostapd.conf
+  template: src=roles/ap/templates/hostapd.conf.j2 dest=/etc/hostapd/hostapd.conf owner=root group=root mode=755 backup=yes
+  notify:
+    - restart hostapd
+- name: modify default hostapd config file
+  lineinfile: dest=/etc/default/hostapd state=present regexp="^DAEMON_CONF" line="DAEMON_CONF='/etc/hostapd/hostapd.conf'"
+  notify:
+    - restart hostapd
+- name: enable and start hostapd
+  service: name=hostapd state=started enabled=yes

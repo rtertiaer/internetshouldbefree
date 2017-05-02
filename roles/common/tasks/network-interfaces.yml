@@ -1,0 +1,10 @@
+---
+- name: template /etc/network/interfaces
+  template: src=roles/common/templates/networking/interfaces.j2 dest=/etc/network/interfaces owner=root group=root mode=644 backup=yes
+  notify:
+    - restart networking
+- name: ensure /etc/network/interfaces.d exists
+  file:
+    path: /etc/network/interfaces.d
+    state: directory
+    mode: 0755

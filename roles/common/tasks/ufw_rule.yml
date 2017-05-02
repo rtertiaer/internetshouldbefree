@@ -1,0 +1,11 @@
+---
+- name: ufw rule
+  ufw:
+    rule: "{{ rule }}"
+    delete: "{{ delete|default(omit) }}"
+    port:  "{{ port|default(omit) }}"
+    from_port: "{{ from_port|default(omit) }}"
+    src: "{{ src|default(omit) }}"
+    dest: "{{ dest|default(omit) }}"
+    log: "{{ log|default(omit) }}"
+    insert: "{{ insert|default(omit) }}"

@@ -1,0 +1,7 @@
+*.swp
+*.retry
+*.log
+test_data
+venv
+.vagrant
+hosts
