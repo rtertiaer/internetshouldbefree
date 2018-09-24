@@ -3,7 +3,7 @@
 :POSTROUTING ACCEPT [0:0]
 
 # Forward traffic through eth0 - Change to match you out-interface
--A POSTROUTING -s {{ nat_range }} -o {{ upstream_dev }} -j MASQUERADE
+-A POSTROUTING -s {{ lan_network }} -o {{ wan_interface }} -j MASQUERADE
 
 # don't delete the 'COMMIT' line or these nat table rules won't
 # be processed

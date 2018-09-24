@@ -1,7 +1,7 @@
-interface={{ lan_interface }}      # Use interface wlan0
+interface={{ lan_interface }}      # Use interface {{ lan_interface }}
 listen-address={{ lan_address }}   # Explicitly specify the address to listen on
 bind-interfaces                    # Bind to the interface to make sure we aren't sending things elsewhere
-server={{upstream_dns_server }}    # Forward DNS requests to this server
+server={{ upstream_dns_server }}    # Forward DNS requests to this server
 domain-needed                      # Don't forward short names
 bogus-priv                         # Never forward addresses in the non-routed address spaces.
-dhcp-range={{ dhcp_range_string }} # Assign IP addresses between 172.24.1.50 and 172.24.1.150 with a 12 hour lease time
+dhcp-range={{ dhcp_range_string }} # DHCP pool and expiry time

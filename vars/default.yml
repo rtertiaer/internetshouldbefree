@@ -1,0 +1,17 @@
+---
+# Network settings
+wan_interface: enp6s0
+lan_interface: wlp8s0
+lan_address: 172.24.20.1
+lan_netmask: 255.255.255.0
+lan_network: 172.24.20.0/24
+
+# Wifi settings
+ssid: Internet should be free
+channel: 1
+hw_mode: g
+
+# DNS & DHCP settings
+dhcp_range_string: 172.24.20.2,172.24.20.254,1h
+upstream_dns_server: 192.168.1.254
+domain: internetshouldbefree.local

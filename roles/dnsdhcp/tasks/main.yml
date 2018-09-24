@@ -5,5 +5,12 @@
   template: src=roles/dnsdhcp/templates/dnsmasq.conf.j2 dest=/etc/dnsmasq.conf owner=root group=root mode=644 backup=yes
   notify:
     - restart dnsmasq
+- name: manage /etc/resolv.conf
+  lineinfile:
+    path: /etc/resolv.conf
+    create: yes
+    state: present
+    line: "search {{ domain }}"
+- meta: flush_handlers
 - name: start and enable dnsmasq
   service: name=dnsmasq state=started enabled=yes

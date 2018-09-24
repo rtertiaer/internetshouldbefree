@@ -1,5 +1,4 @@
 ---
-# Pass 'nat_range' and 'upstream_dev' vars to this
 - name: set default foward policy for ufw
   lineinfile:
     path: /etc/default/ufw

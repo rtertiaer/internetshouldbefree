@@ -1,10 +1,10 @@
 ---
 # what can I say, I'm opinionated
-- name: install tmux
-  package: name=tmux state=latest
-- name: install vim
-  package: name=vim state=latest
-- name: install dstat
-  package: name=dstat state=latest
-- name: install curl
-  package: name=curl state=latest
+- name: install base packages
+  package: name={{ item }} state=latest
+  with_items:
+    - tmux
+    - vim
+    - dstat
+    - curl
+    - isc-dhcp-client

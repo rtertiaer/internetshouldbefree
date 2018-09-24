@@ -1,0 +1,9 @@
+---
+# We flush handlers to make sure our network config has internet connectivity
+- meta: flush_handlers
+- name: Download adblocked /etc/hosts file
+  get_url:
+    url: https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+    dest: /etc/hosts
+    force: yes
+    backup: yes
